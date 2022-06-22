@@ -261,7 +261,7 @@ function App(props) {
   console.log("💸 balanceStaked:", balanceStaked);
 
   // ** 📟 Listen for broadcast events
-  const stakeEvents = useEventListener(readContracts, "Staker", "Stake", localProvider, 1);
+  const stakeEvents = useEventListener(readContracts, "Staker", "Staked", localProvider, 1);
   console.log("📟 stake events:", stakeEvents);
 
   // ** keep track of a variable from the contract in the local React state:
