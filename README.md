@@ -1,2 +1,2 @@
-# scaffoldEthChall0
-Challenge 0 from https://speedrunethereum.com/
+# scaffoldEthChallenges
+Challenges from https://speedrunethereum.com/
