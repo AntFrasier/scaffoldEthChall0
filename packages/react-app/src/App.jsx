@@ -563,6 +563,16 @@ function App(props) {
                 🥩 Stake 0.5 ether!
               </Button>
             </div>
+            <div style={{ padding: 8 }}>
+              <Button
+                type={balanceStaked ? "success" : "primary"}
+                onClick={() => {
+                  tx(writeContracts.Staker.reset(30));
+                }}
+              >
+                 ⏱ reset for 30 sec
+              </Button>
+            </div>
 
             {/*
                 🎛 this scaffolding is full of commonly used components
@@ -637,7 +647,7 @@ function App(props) {
 
       <div style={{ marginTop: 32, opacity: 0.5 }}>
         {/* Add your address here */}
-        Created by <Address value={"Your...address"} ensProvider={mainnetProvider} fontSize={16} />
+        Created by <Address value={"0xB810b728E44df56eAf4Da93DDd08168B3660753f"} ensProvider={mainnetProvider} fontSize={16} />
       </div>
 
       <div style={{ marginTop: 32, opacity: 0.5 }}>
