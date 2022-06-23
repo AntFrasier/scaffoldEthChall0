@@ -1,5 +1,15 @@
 # 🏗 scaffold-eth | 🏰 BuidlGuidl
 
+## What i Did :
+scaffoldEth_CM_Cahllenge1.surge.sh
+Stakers contract address on rinkeby : 0x52e8C72575f7AB018D4D67804bc713D32652Cf0C
+External contract address : 0xE5De3e0f7aB4E3d2cFfDe93Bc1CCc4d2D85787F6
+
+I added a reset function that reset the timer (30 sec in the UI but you can set the time you'd like in the debug) 
+    This function reset the timer, the completed, the withdraw and send back the All the Eth to the stakers. I did that just for testing ...
+
+Chears :)
+
 ## 🚩 Challenge 1: 🥩 Decentralized Staking App
 
 > 🦸 A superpower of Ethereum is allowing you, the builder, to create a simple set of rules that an adversarial group of players can use to work together. In this challenge, you create a decentralized application where users can coordinate a group funding effort. If the users cooperate, the money is collected in a second smart contract. If they defect, the worst that can happen is everyone gets their money back. The users only have to trust the code.
