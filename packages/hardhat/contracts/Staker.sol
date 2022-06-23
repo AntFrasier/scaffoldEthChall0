@@ -40,7 +40,7 @@ contract Staker {
       balances[staker] = 0;
       emit Staked (staker, balances[staker]);
     }
-    stakers = []; //oO cha morch po
+    delete stakers; //oO cha morch po
   }
 
   function reset (uint256 _newDeadLine ) public { //this is just for testing purpose
