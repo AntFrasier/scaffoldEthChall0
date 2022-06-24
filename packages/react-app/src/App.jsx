@@ -414,8 +414,9 @@ function App(props) {
       );
     }
   } else {
+    //changed absolute by fixed 
     networkDisplay = (
-      <div style={{ zIndex: -1, position: "absolute", right: 154, top: 28, padding: 16, color: targetNetwork.color }}>
+      <div style={{ position: "fixed", right: 154, top: 28, padding: 16, color: targetNetwork.color }}> 
         {targetNetwork.name}
       </div>
     );
@@ -485,6 +486,9 @@ function App(props) {
 
   const buyTokensEvents = useEventListener(readContracts, "Vendor", "BuyTokens", localProvider, 1);
   console.log("📟 buyTokensEvents:", buyTokensEvents);
+
+  const sellTokensEvents = useEventListener(readContracts, "Vendor", "SellTokens", localProvider, 1);
+  console.log("📟 sellTokensEvents:", sellTokensEvents);
 
   const [tokenBuyAmount, setTokenBuyAmount] = useState({
     valid: false,
@@ -599,7 +603,7 @@ function App(props) {
             </div>
             {transferDisplay}
             <Divider />
-            <div style={{ padding: 8, marginTop: 32, width: 300, margin: "auto" }}>
+            <div style={{ padding: 8, marginTop: 32, width: 900, margin: "auto", display:"flex", justifyContent:"space-around" }}>
               <Card title="Buy Tokens" extra={<a href="#">code</a>}>
                 <div style={{ padding: 8 }}>{tokensPerEth && tokensPerEth.toNumber()} tokens per ETH</div>
                 <div style={{ padding: 8 }}>
@@ -634,14 +638,6 @@ function App(props) {
                   </Button>
                 </div>
               </Card>
-            </div>
-          
-            
-            
-            {/*Extra UI for buying the tokens back from the user using "approve" and "sellTokens"
-
-            <Divider />
-            <div style={{ padding: 8, marginTop: 32, width: 300, margin: "auto" }}>
               <Card title="Sell Tokens">
                 <div style={{ padding: 8 }}>{tokensPerEth && tokensPerEth.toNumber()} tokens per ETH</div>
 
@@ -714,8 +710,19 @@ function App(props) {
 
 
               </Card>
+              
             </div>
-            */}
+
+          
+            
+            {/* //start of uncoment
+            //Extra UI for buying the tokens back from the user using "approve" and "sellTokens" */}
+
+            <Divider />
+            <div style={{ padding: 8, marginTop: 32, width: 300, margin: "auto" }}>
+              
+            </div>
+             {/* //end of uncoment */}
             <div style={{ padding: 8, marginTop: 32 }}>
               <div>Vendor Token Balance:</div>
               <Balance balance={vendorTokenBalance} fontSize={64} />
@@ -726,7 +733,8 @@ function App(props) {
               <Balance balance={vendorETHBalance} fontSize={64} /> ETH
             </div>
 
-            <div style={{ width: 500, margin: "auto", marginTop: 64 }}>
+            <div style={{ width: 900, margin: "auto", marginTop: 64 , display:"flex", justifyContent:"space-around"}}>
+              <div>
               <div>Buy Token Events:</div>
               <List
                 dataSource={buyTokensEvents}
@@ -742,6 +750,24 @@ function App(props) {
                   );
                 }}
               />
+              </div>
+              <div>
+              <div>Sell Token Events:</div>
+              <List
+                dataSource={sellTokensEvents}
+                renderItem={item => {
+                  return (
+                    <List.Item key={item.blockNumber + item.blockHash}>
+                      <Address value={item.args[0]} ensProvider={mainnetProvider} fontSize={16} /> paid
+                      <Balance balance={item.args[2]} />
+                      Tokens to get
+                      <Balance balance={item.args[1]} />
+                      Eth
+                    </List.Item>
+                  );
+                }}
+              />
+              </div>
             </div>
 
             {/*
