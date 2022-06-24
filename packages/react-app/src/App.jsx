@@ -595,7 +595,7 @@ function App(props) {
         <Switch>
           <Route exact path="/">
             <div style={{ padding: 8, marginTop: 32, width: 300, margin: "auto" }}>
-              <Card title="Your Tokens" extra={<a href="#">code</a>}>
+              <Card title="Your Tokens" extra={<a href="https://github.com/AntFrasier/scaffoldEthChall0/blob/challenge-2-token-vendor/packages/hardhat/contracts/YourToken.sol" target={"blank"}>code</a>}>
                 <div style={{ padding: 8 }}>
                   <Balance balance={yourTokenBalance} fontSize={64} />
                 </div>
@@ -604,7 +604,7 @@ function App(props) {
             {transferDisplay}
             <Divider />
             <div style={{ padding: 8, marginTop: 32, width: 900, margin: "auto", display:"flex", justifyContent:"space-around" }}>
-              <Card title="Buy Tokens" extra={<a href="#">code</a>}>
+              <Card title="Buy Tokens" extra={<a href="https://github.com/AntFrasier/scaffoldEthChall0/blob/challenge-2-token-vendor/packages/hardhat/contracts/Vendor.sol" target={"blank"}>code</a>}>
                 <div style={{ padding: 8 }}>{tokensPerEth && tokensPerEth.toNumber()} tokens per ETH</div>
                 <div style={{ padding: 8 }}>
                   <Input

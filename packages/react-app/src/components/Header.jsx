@@ -1,14 +1,20 @@
 // import { PageHeader } from "antd";
 import React from "react";
-import logo from "../img/logo.svg"
+import logo from "../img/logo.svg";
+// import "./css/header.less";
 
 // displays a page header
 
 export default function Header() {
   return (
+    <div className="header">
+      <div className="logo">
+        <div className="rond"></div>
+        <div className="rond"></div>
+      </div>
     <a href="https://cyril-maranber.com" target="_blank" rel="noopener noreferrer" style={{textAlign:"left"}}>
       <h1>
-        <img src={logo} />
+        {/* <img src={logo} /> */}
         Forked from ScaffolgEth Challenges.
       </h1>
       {/* <PageHeader
@@ -17,5 +23,6 @@ export default function Header() {
         style={{ cursor: "pointer" }}
       /> */}
     </a>
+    </div>
   );
 }

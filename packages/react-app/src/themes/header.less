@@ -1,0 +1,56 @@
+@import "./themes/dark-theme.less";
+
+@logoWidth: 50px;
+@logo-height: 50px;
+@logo-border: 4px;
+@logo-border-color: #212121;
+
+// .logo{
+//     position: relative;
+//     display: flex;
+// }
+
+.rond {
+    width: 80px;
+    height: 80px;
+    position : relative;
+
+    &:before {
+    content: '';
+    width: 80px;
+    height: 80px;
+    /* background-color: brown; */
+    border: solid @logo-border @logo-border-color;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+}
+}
+
+.rond :last-child {
+    left: calc(@logo-width + 0px );
+}
+/* .header::after {
+    content: '';
+    width: @logo-width);
+    height: @logo-height);
+    border: solid @logo-border) @logo-border-color);
+    background-color: rgb(42, 44, 165);
+    position: absolute;
+    top: 0;
+    left: calc(@logo-width) + 0px );
+    border-radius: 50%;
+} */
+
+/* .scare::after{
+    content: '';
+    width: calc(@logo-width) - 10px);
+    height: @logo-height);
+    border: solid @logo-border) @logo-border-color);
+    background-color: rgb(42, 44, 165);
+    position: absolute;
+    top: 0;
+    left: calc(@logo-width) + 0px );
+    transform : rotateZ(45deg);
+} */
