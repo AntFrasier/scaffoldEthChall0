@@ -11,8 +11,8 @@ export default function Logo() {
             </div>
                 <div className="container-rond">
             <div className="rond2">
-                <div className="first-name">yril</div>
-                <div className="name">aranber</div>
+                <h2 className="first-name">yril</h2>
+                <h2 className="name">aranber</h2>
             </div>
             <div className="carre2"></div>
             
