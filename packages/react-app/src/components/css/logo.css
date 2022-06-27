@@ -14,6 +14,8 @@
     margin-top: calc(var(--circle-width) / 4);
     margin-left: calc(var(--circle-width) / 4);
     position: relative;
+    transform: scale(1);
+    transition: all 500ms ease-in-out;
 }
 
 .container-rond{
@@ -34,27 +36,43 @@
     border-right: solid var(--circle-border-size) var(--logo-background); ;
 }
 
-.rond1::after{
+.rond1::after{  /* carre dans le rond */
     content: '';
     position: absolute;
-    left: calc((var(--circle-width) / 2)); /* - calc( calc(var(--circle-width) / 4))) ;*/
-    top: calc(calc(var(--circle-width) / 2) - calc( calc(var(--circle-width) / 4) + calc(var(--circle-border-size) / 2 )));
-    width: calc( calc(var(--circle-width) / 2) + var(--circle-border-size)); /*- calc(var(--circle-border-size) * 1)); /*var(--scare-side) ;*/
-    height: calc( calc(var(--circle-width) / 2) + var(--circle-border-size)); /* - calc(var(--circle-border-size) * 1));/*var(--scare-side);   */
+    left: calc(calc((var(--circle-width) / 2)) - calc(var(--circle-border-size) / 4 )); /* - calc( calc(var(--circle-width) / 4))) ;*/
+    top: calc(calc(var(--circle-width) / 2) - calc( calc(var(--circle-width) / 4) + 2px));
+    width: calc( calc(var(--circle-width) / 2) + 4px ); /*; /*var(--scare-side) ;*/
+    height: calc( calc(var(--circle-width) / 2) + 4px); /* - calc(var(--circle-border-size) * 1));/*var(--scare-side);   */
+    /*
+    top: calc(calc(var(--circle-width) / 2) - calc( calc(var(--circle-width) / 4) + calc(var(--circle-border-size) / 10 )));
+    width: calc( calc(var(--circle-width) / 2) + calc(var(--circle-border-size) / 5 )); /*- calc(var(--circle-border-size) * 1)); /*var(--scare-side) ;*/
+    /*height: calc( calc(var(--circle-width) / 2) + calc(var(--circle-border-size) / 5 )); /* - calc(var(--circle-border-size) * 1));/*var(--scare-side);   */
+
     transform: rotateZ(45deg);
     border-left:solid var(--circle-border-size) var(--circle-border-color) ;
     border-bottom:solid var(--circle-border-size) var(--circle-border-color) ;
 }
 
- .carre1::before{
+ .carre1::before{ /*masque du centre du carre dans le rond*/
     content: '';
     position: absolute;
     top: calc(calc(var(--circle-width) / 2) - calc(var(--scare-side) / 4));
-    left: calc(var(--circle-border-size) * 3 );
+    left: calc(var(--circle-border-size) * 2 );
     width: calc(var(--scare-side) );
     height: calc(var(--scare-side) / 2);
      background-color: var(--logo-background);   
     }
+
+.first-name {
+    position: absolute;
+    left : var(--circle-width);
+    top: calc(calc(var(--circle-width) / 2 ) - .5em);
+    z-index: 10;
+    transform: scaleX(0);
+    transition: all 500ms ease-in-out;
+    transform-origin: left;
+    transition-delay: 250ms;
+}
 
 .rond2::before{
     content: '';
@@ -68,19 +86,35 @@
     transition: all 500ms ease-in-out;
 }
 
-.rond2:hover::before{
-    background-color: blue;
-    transform: translateY(calc(var(--circle-height) / 2));
-}
-
-.rond2::after {
+.rond2::after { /* triangle bacground */
         content: '';
         position: absolute;
         width: 0;
         height: 0;
-        top: 0;
-        left : calc(var(--circle-width) + 0px);
+        top: -1px;
+        left : var(--circle-width);
         border-left: calc(var(--circle-width) / 2) solid transparent;
         border-right:  calc(var(--circle-width) / 2) solid transparent;
-        border-top:  calc(var(--circle-width) / 2) solid var(--logo-background);
+        border-top:  calc(var(--circle-width) /2 ) solid var(--logo-background);
+        transition: all 500ms ease-in-out;
+}
+
+.name{
+    position: absolute;
+    left: calc(var(--circle-width) * 2);
+    top: calc( var(--circle-width) - .5em);
+    
+    transform: scaleY(0); 
+    transition: all 500ms ease-in-out;
+    transform-origin: top;
+    transition-delay: 250ms;
+}
+
+
+.rond2:hover::before, .rond2:hover::after{
+    /* background-color: blue; */
+    transform: translateY(calc(var(--circle-height) / 2));
+}
+.rond2:hover .name, .rond2:hover .first-name {
+    transform: scaleX(1) scaleY(1);
 }
