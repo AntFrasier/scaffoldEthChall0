@@ -9,11 +9,21 @@ export default function ThemeSwitcher() {
 
   useEffect(() => {
     window.localStorage.setItem("theme", currentTheme);
+    if (isDarkMode) {
+      document.documentElement.style.setProperty('--circle-border-color', '#fff');
+      document.documentElement.style.setProperty('--logo-background', '#212121');
+
+    } else {
+         document.documentElement.style.setProperty('--circle-border-color', '#212121');
+         document.documentElement.style.setProperty('--logo-background', '#fff');
+      }
+
   }, [currentTheme]);
 
   const toggleTheme = isChecked => {
     setIsDarkMode(isChecked);
     switcher({ theme: isChecked ? themes.dark : themes.light });
+    isDarkMode? document.documentElement.style.setProperty('--circle-border-color', '#212121') : document.documentElement.style.setProperty('--circle-border-color', '#fff');
   };
 
   // Avoid theme change flicker
@@ -22,7 +32,7 @@ export default function ThemeSwitcher() {
   // }
 
   return (
-    <div className="main fade-in" style={{ position: "fixed", right: 8, bottom: 8 }}>
+    <div className="main fade-in" style={{ position: "fixed", right: 8, bottom: 8, zIndex:10 }}>
       <span style={{ padding: 8 }}>{currentTheme === "light" ? "☀️" : "🌜"}</span>
       <Switch checked={isDarkMode} onChange={toggleTheme} />
     </div>

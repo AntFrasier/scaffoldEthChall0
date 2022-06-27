@@ -1,17 +1,17 @@
 // import { PageHeader } from "antd";
 import React from "react";
-import logo from "../img/logo.svg";
+import Logo from "./Logo";
 // import "./css/header.less";
 
 // displays a page header
 
 export default function Header() {
   return (
+
     <div className="header">
-      <div className="logo">
-        <div className="rond"></div>
-        <div className="rond"></div>
-      </div>
+
+      <Logo />
+
     <a href="https://cyril-maranber.com" target="_blank" rel="noopener noreferrer" style={{textAlign:"left"}}>
       <h1>
         {/* <img src={logo} /> */}

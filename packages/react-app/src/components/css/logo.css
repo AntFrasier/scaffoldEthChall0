@@ -1,0 +1,86 @@
+:root {
+    --circle-width : 55px;
+    --circle-height : var(--circle-width);
+    --circle-border-color : #212121;
+    --circle-border-size : 5px;
+    --racine-de-2: calc(sqrt(2px)); /*not implement in browsers yet (06 2022) */
+    --scare-side: calc(var(--circle-width) / 1.4114 );
+    --logo-background : #fff;
+}
+
+.logo{
+    width: calc(2 * var(--circle-width));
+    height: var(--circle-height);     
+    margin-top: calc(var(--circle-width) / 4);
+    margin-left: calc(var(--circle-width) / 4);
+    position: relative;
+}
+
+.container-rond{
+    overflow: hidden;
+    max-width: var(--circle-width);
+
+}
+
+.rond1::before{
+    content: '';
+    position: absolute;
+    top : 0;
+    left: 0;
+    width: var(--circle-width);
+    height: var(--circle-height);   
+    border-radius: 50%;
+    border : solid var(--circle-border-size) var(--circle-border-color);
+    border-right: solid var(--circle-border-size) var(--logo-background); ;
+}
+
+.rond1::after{
+    content: '';
+    position: absolute;
+    left: calc((var(--circle-width) / 2)); /* - calc( calc(var(--circle-width) / 4))) ;*/
+    top: calc(calc(var(--circle-width) / 2) - calc( calc(var(--circle-width) / 4) + calc(var(--circle-border-size) / 2 )));
+    width: calc( calc(var(--circle-width) / 2) + var(--circle-border-size)); /*- calc(var(--circle-border-size) * 1)); /*var(--scare-side) ;*/
+    height: calc( calc(var(--circle-width) / 2) + var(--circle-border-size)); /* - calc(var(--circle-border-size) * 1));/*var(--scare-side);   */
+    transform: rotateZ(45deg);
+    border-left:solid var(--circle-border-size) var(--circle-border-color) ;
+    border-bottom:solid var(--circle-border-size) var(--circle-border-color) ;
+}
+
+ .carre1::before{
+    content: '';
+    position: absolute;
+    top: calc(calc(var(--circle-width) / 2) - calc(var(--scare-side) / 4));
+    left: calc(var(--circle-border-size) * 3 );
+    width: calc(var(--scare-side) );
+    height: calc(var(--scare-side) / 2);
+     background-color: var(--logo-background);   
+    }
+
+.rond2::before{
+    content: '';
+    position: absolute;
+    width: var(--circle-width);
+    height: var(--circle-height);  
+    top: 0;
+    left : calc(var(--circle-width) + 0px);
+    border-radius: 50%;
+    border : solid var(--circle-border-size) var(--circle-border-color);
+    transition: all 500ms ease-in-out;
+}
+
+.rond2:hover::before{
+    background-color: blue;
+    transform: translateY(calc(var(--circle-height) / 2));
+}
+
+.rond2::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 0;
+        left : calc(var(--circle-width) + 0px);
+        border-left: calc(var(--circle-width) / 2) solid transparent;
+        border-right:  calc(var(--circle-width) / 2) solid transparent;
+        border-top:  calc(var(--circle-width) / 2) solid var(--logo-background);
+}
