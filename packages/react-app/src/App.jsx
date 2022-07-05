@@ -1,6 +1,6 @@
 import Portis from "@portis/web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import { Alert, Button, Card, Col, Divider, Input, List, Menu, Row } from "antd";
+import { Alert, Button, Card, Col, Divider, Input, List, Menu, Row, Drawer } from "antd";
 import "antd/dist/antd.css";
 import Authereum from "authereum";
 import {
@@ -563,6 +563,27 @@ function App(props) {
     );
   }
 
+   //adding slide out debug states 
+   const [debugContractToShow, setDebugContractToShow] = useState('');
+
+   const contractsToShow = Object.keys(readContracts).map ( (_contractName) => {
+     if (!debugContractToShow) setDebugContractToShow(_contractName) //if there as been no click show the last contract that've been deployed
+     return(
+       <Menu.Item key={`${_contractName}`}>
+      <Link  onClick={ () => { setDebugContractToShow(_contractName)}}>{_contractName}</Link>
+      </Menu.Item>
+         );
+       }); 
+     const [visible, setVisible] = useState(false);
+     const showDrawer = () => {
+         setVisible(true);
+       };
+     
+     const onClose = () => {
+         setVisible(false);
+       };
+ //end of slide out states
+
   return (
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
@@ -657,7 +678,7 @@ function App(props) {
                   />
                   <Balance balance={ethValueToSellTokens} dollarMultiplier={price} />
                 </div>
-                {isSellAmountApproved?
+                {isSellAmountApproved ?
 
                   <div style={{ padding: 8 }}>
                     <Button
@@ -689,11 +710,11 @@ function App(props) {
                         setBuying(true);
                         await tx(writeContracts.YourToken.approve(readContracts.Vendor.address, tokenSellAmount.valid && ethers.utils.parseEther(tokenSellAmount.value)));
                         setBuying(false);
-                        let resetAmount = tokenSellAmount
+                        let resetAmount = tokenSellAmount                        
                         setTokenSellAmount("");
                         setTimeout(()=>{
                           setTokenSellAmount(resetAmount)
-                        },1500)
+                        },3500) //1500 is to short and create some "bug" with te sell tokens button
                       }}
                       disabled={!tokenSellAmount.valid}
                       >
@@ -771,22 +792,40 @@ function App(props) {
             </div>
 
             {/*
-
                 🎛 this scaffolding is full of commonly used components
                 this <Contract/> component will automatically parse your ABI
-                and give you a form to interact with it locally
-
-            <Contract
-              name="YourContract"
-              signer={userSigner}
-              provider={localProvider}
-              address={address}
-              blockExplorer={blockExplorer}
-              contractConfig={contractConfig}
-            />
+                and give you a form to interact with it locally       
             */}
+
+              {/* adding slide out debug  */}
+      <Button  style={{position : "fixed", right:"26px", top: 130}} type="primary" onClick={showDrawer}>
+          Debug Contracts
+      </Button>
+      <Drawer
+        contentWrapperStyle={{width:"40vw"}}
+        title="Debug"
+        placement="left"
+        closable={true}
+        onClose={onClose}
+        visible={visible}
+        key="right">
+         
+        <Menu selectedKeys={debugContractToShow} mode="horizontal">          
+          {contractsToShow}
+        </Menu>
+        <Contract
+            name={debugContractToShow}
+            price={price}
+            signer={userSigner}
+            provider={localProvider}
+            address={address}
+            blockExplorer={blockExplorer}
+            contractConfig={contractConfig}
+          /> 
+      </Drawer>
           </Route>
           <Route path="/contracts">
+          <div style={{margin: "auto", width:"70vw"}}>{/* added this div to keep 70vh on the /debug page */}
             <Contract
               name="Vendor"
               signer={userSigner}
@@ -803,6 +842,7 @@ function App(props) {
               blockExplorer={blockExplorer}
               contractConfig={contractConfig}
             />
+            </div>
           </Route>
         </Switch>
       </BrowserRouter>

@@ -32,7 +32,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 
   //ToDo: change address to your frontend address vvvv
   console.log("\n 🤹  Sending ownership to frontend address...\n")
-  const ownershipTransaction = await vendor.transferOwnership("0x668d62D32120E36fB931cA2632815822aa866533");
+  const ownershipTransaction = await vendor.transferOwnership("0xB30A3bab394C8C17157f31CFd7EB13e7aB410f28");
   console.log("\n    ✅ confirming...\n");
   const ownershipResult = await ownershipTransaction.wait();
 
