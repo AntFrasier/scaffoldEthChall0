@@ -1,4 +1,4 @@
-import { Button, Col, Menu, Row, List } from "antd";
+import { Button, Col, Menu, Row, List, Drawer } from "antd";
 import "antd/dist/antd.css";
 import {
   useBalance,
@@ -265,6 +265,27 @@ function App(props) {
   // const LiquidityRemovedEvents = useEventListener(readContracts, "DEX", "LiquidityRemoved", 1);
   // // console.log("➖ LiquidityRemovedEvents:", LiquidityRemovedEvents);
 
+  //adding slide out debug states 
+  const [debugContractToShow, setDebugContractToShow] = useState('');
+
+  const contractsToShow = Object.keys(readContracts).map ( (_contractName) => {
+    if (!debugContractToShow) setDebugContractToShow(_contractName) //if there as been no click show the last contract that've been deployed
+    return(
+      <Menu.Item key={`${_contractName}`}>
+     <Link  onClick={ () => { setDebugContractToShow(_contractName)}}>{_contractName}</Link>
+     </Menu.Item>
+        );
+      }); 
+    const [visible, setVisible] = useState(false);
+    const showDrawer = () => {
+        setVisible(true);
+      };
+    
+    const onClose = () => {
+        setVisible(false);
+      };
+//end of slide out states
+
   return (
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
@@ -333,6 +354,32 @@ function App(props) {
               }}
             />
           </div>
+         {/* adding slide out debug  */}
+          <Button  style={{position : "fixed", right:"26px", top: 130}} type="primary" onClick={showDrawer}>
+              Debug Contracts
+          </Button>
+          <Drawer
+            contentWrapperStyle={{width:"40vw"}}
+            title="Debug"
+            placement="left"
+            closable={true}
+            onClose={onClose}
+            visible={visible}
+            key="right">
+            
+            <Menu selectedKeys={debugContractToShow} mode="horizontal">          
+              {contractsToShow}
+            </Menu>
+            <Contract
+                name={debugContractToShow}
+                price={price}
+                signer={userSigner}
+                provider={localProvider}
+                address={address}
+                blockExplorer={blockExplorer}
+                contractConfig={contractConfig}
+              /> 
+          </Drawer>
         </Route>
 
         <Route exact path="/debug">
@@ -341,7 +388,7 @@ function App(props) {
                 this <Contract/> component will automatically parse your ABI
                 and give you a form to interact with it locally
             */}
-
+          <div style={{margin: "auto", width:"70vw"}}>{/* added this div to keep 70vh on the /debug page */}
           <Contract
             name="DEX"
             price={price}
@@ -361,6 +408,7 @@ function App(props) {
             blockExplorer={blockExplorer}
             contractConfig={contractConfig}
           />
+        </div>
         </Route>
         <Route path="/hints">
           <Hints
